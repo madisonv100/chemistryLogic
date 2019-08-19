@@ -1,5 +1,16 @@
 import java.util.ArrayList;
 
+
+
+/*
+Improvment Notes:
+- make it handle fractional starting points:p1
+density in g/L ---> denisty in mg/ml
+-make it convert time into --> minutes, hours, days, week, years
+-make it convert temperature--> kelvin, farheit, celcius
+-
+*/
+
 public class UnitCalc {
 
 public ArrayList<Fraction> UnitPath = new ArrayList <Fraction>();
@@ -12,15 +23,19 @@ String goalPrefix;
 String startPrefix;
 float startNum;
 float answer;
-String dimension;
+String dimensionName;
+Converter.dimensionValue dimension;
 
 
 
 
 
-UnitCalc(String dimension, String StartingUnit, float startNum,  String GoalUnit)
+
+UnitCalc(String dimension, String dimensionName, String StartingUnit, float startNum,  String GoalUnit)
 {
-this.dimension = dimension;
+this.dimensionName = dimensionName;
+this.dimension = Converter.getDimension(dimension);
+
 this.startNum = startNum;
 startPrefix = StartingUnit;
 goalPrefix = GoalUnit;
@@ -36,6 +51,8 @@ this.GoalUnit = Converter.getPrefix(GoalUnit);
 
 public void createPath()
 {
+	
+//if(dimension =)
   if(StartingUnit.unitsFromBase == GoalUnit.unitsFromBase)
   {
 	 Fraction startAndEnd = new Fraction(startNum,1);
@@ -43,9 +60,6 @@ public void createPath()
 	 answer = startAndEnd.getDecimal();
 	 
   }
-  
-
-
   //all other cases should be done in 3 steps 
   else
   {
@@ -87,6 +101,12 @@ public void createPath()
 
 public void makeString()
 {
+	
+if(dimension.equals(Converter.dimensionValue.weight)|| dimension.equals(Converter.dimensionValue.volume) || dimension.equals(Converter.dimensionValue.length)
+	||	dimension.equals(Converter.dimensionValue.weight))
+{
+	
+
 	  for (int i = 0; i < UnitPath.size(); i ++) 
 	  { 
 		  Float numerator =  UnitPath.get(i).getNumerator(); 
@@ -95,23 +115,26 @@ public void makeString()
 		  
 		 if(i == 0)
 		 {
-			 System.out.print(numerator + startPrefix+dimension + "/" +
-	          denominator + dimension +"   x   ");
+			 System.out.print(numerator + startPrefix+dimensionName + "/" +
+	          denominator + dimensionName +"   x   ");
 		 }
 		  
 		  else if(i != UnitPath.size()-1) 
 		  {
-			  System.out.print(numerator + dimension + "/" +
-	          denominator + startPrefix +dimension +"   x   "); 
+			  System.out.print(numerator + dimensionName + "/" +
+	          denominator + startPrefix +dimensionName +"   x   "); 
 		  }
 		  else {
-			  System.out.print(numerator + goalPrefix +dimension+ "/" + denominator+ dimension + " = ");
+			  System.out.print(numerator + goalPrefix +dimensionName+ "/" + denominator+ dimensionName + " = ");
 	          System.out.printf("%.3f",answer);
-	          System.out.print(" " + goalPrefix+dimension);
+	          System.out.print(" " + goalPrefix+dimensionName);
 	  }
 	  
 	  
 	  }
+}
+
+
 }
 
 

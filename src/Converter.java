@@ -17,6 +17,51 @@ public class Converter {
 		}
 	}
 	
+	public enum dimensionValue
+	{
+		length, pressure, density, weight, volume, speed, time, temperature,  invalid
+	}
+	
+	public static dimensionValue getDimension(String dimension)
+	{
+		if(dimension.equals("length"))
+		{
+			return dimensionValue.length;
+		}
+		else if (dimension.equals("time"))
+		{
+			return dimensionValue.time;
+		}
+		else if (dimension.equals("temperature"))
+		{
+			return dimensionValue.temperature;
+		}
+		else if (dimension.equals("pressure"))
+		{
+			return dimensionValue.pressure;
+		}
+		else if (dimension.equals("density"))
+		{
+			return dimensionValue.density;
+		}
+		else if (dimension.equals("weight"))
+		{
+			return dimensionValue.weight;
+		}
+		else if(dimension.equals("volume"))
+		{
+			return dimensionValue.volume;
+		}
+		else if (dimension.equals("speed"))
+		{
+			return dimensionValue.speed;
+		} 
+		else 
+		{
+			return dimensionValue.invalid;
+		}
+	}
+	
 	
 	public static  prefixValue getPrefix(String prefix)
 	{
@@ -129,6 +174,8 @@ public class Converter {
 
 		
 	}
+	
+
 
 	
 }
