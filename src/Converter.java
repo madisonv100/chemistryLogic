@@ -1,9 +1,47 @@
 
-public class Converter {
+public class Converter{
+	
+private String unitName;
+
+public String getUnitName()
+{
+	return unitName;
+}
+
+public prefixValue getBase(dimensionValue dimension)
+{
+	if(dimension.equals(dimensionValue.length))
+	{
+		return prefixValue.base;
+	}
+	else if (dimension.equals(dim))
+}
 	public enum prefixValue
 	{
+			
+	//atm is base 
+	//seconds is base 
+	//
+		//length, weight
+		// TODO; MAKES IT REGONIZED VOLUME IN LENGHT CUBED 
 		giga(1000000000f), mega(1000000f), kilo(1000f), hecto(100f), decka(10f), base(1f),
-		deci(0.1f), centi(0.01f), milli(0.001f), micro(0.000001f), nano(.000000001f);
+		deci(0.1f), centi(0.01f), milli(0.001f), micro(0.000001f), nano(.000000001f),
+		
+		//time second is your base
+		
+		seconds(1f), minutes(3600f), hours(216000f), days(5184000f), weeks(36288000f), years(1886976000f),
+		
+		//PRESSURE
+		//atm is your base 
+		
+		atm(1f), torr(760f), mmhg(760f), kpa(101.3f), psi(147f)
+		
+		//SPEED
+		//Base: is the base for time and length --> meters / seconds 
+		//this will have to be a combination of lengths conversions and times conversions: it will go into unit calc calculations for
+		//starting with a number on the top AND bottom 
+		
+		;
 		
 		public Float unitsFromBase;
 		prefixValue(Float unitsFromBase)
@@ -34,9 +72,10 @@ public class Converter {
 		}
 		else if (dimension.equals("temperature"))
 		{
+			
 			return dimensionValue.temperature;
 		}
-		else if (dimension.equals("pressure"))
+		else if (dimension.equals("pressure") )
 		{
 			return dimensionValue.pressure;
 		}
@@ -69,6 +108,46 @@ public class Converter {
 		{
 		return  prefixValue.giga;
 		 
+		}
+		else if (prefix.equals("seconds"))
+		{
+	 return prefixValue.seconds;
+		}
+		else if (prefix.equals("minutes"))
+		{
+			return prefixValue.minutes;
+		}
+		else if (prefix.equals("hours"))
+		{
+			return prefixValue.hours;
+		}
+		else if (prefix.equals("days"))
+		{
+			return prefixValue.days;
+		}
+		else if (prefix.equals("weeks"))
+		{
+			return prefixValue.weeks;
+		}
+		else if (prefix.equals("years"))
+		{
+			return prefixValue.years;
+		}
+		else if (prefix.equals("atm"))
+		{
+			return prefixValue.atm;
+		}
+		else if (prefix.equals("torr"))
+		{
+			return prefixValue.torr;
+		}
+		else if (prefix.equals("kpa"))
+		{
+			return prefixValue.kpa;
+		}
+		else if (prefix.equals("psi"))
+		{
+			return prefixValue.psi;
 		}
 	else if (prefix.equals("mega"))
 	{
