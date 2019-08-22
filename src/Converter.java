@@ -1,7 +1,8 @@
 
 public class Converter{
 	
-private String unitName;
+private String unitName;  
+
 
 public String getUnitName()
 {
@@ -14,14 +15,29 @@ public prefixValue getBase(dimensionValue dimension)
 	{
 		return prefixValue.base;
 	}
-	else if (dimension.equals(dim))
+	else if (dimension.equals(dimensionValue.pressure))
+	{
+		return prefixValue.atm;
+	}
+	else if(dimension.equals(dimensionValue.time))
+	{
+		return prefixValue.seconds;
+	}
+	else if (dimension.equals(dimensionValue.temperature))
+	{
+		return prefixValue.celcius;
+	}
+	else
+	{
+		return prefixValue.invalid;
+	}
 }
 	public enum prefixValue
 	{
 			
 	//atm is base 
 	//seconds is base 
-	//
+	
 		//length, weight
 		// TODO; MAKES IT REGONIZED VOLUME IN LENGHT CUBED 
 		giga(1000000000f), mega(1000000f), kilo(1000f), hecto(100f), decka(10f), base(1f),
@@ -34,12 +50,20 @@ public prefixValue getBase(dimensionValue dimension)
 		//PRESSURE
 		//atm is your base 
 		
-		atm(1f), torr(760f), mmhg(760f), kpa(101.3f), psi(147f)
+		atm(1f), torr(760f), mmhg(760f), kpa(101.3f), psi(147f),
 		
 		//SPEED
 		//Base: is the base for time and length --> meters / seconds 
 		//this will have to be a combination of lengths conversions and times conversions: it will go into unit calc calculations for
 		//starting with a number on the top AND bottom 
+		
+		
+		//temperature 
+		//BASE = celcius 
+		celcius(1f), kelvin(274.15f), farenheit(33.8f),
+		
+		//default
+		invalid(0f)
 		
 		;
 		
