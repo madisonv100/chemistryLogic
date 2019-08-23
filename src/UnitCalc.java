@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -146,7 +147,7 @@ if(dimension.equals((Converter.dimensionValue.length)) || (dimension.equals(Conv
 		  double numerator =  UnitPath.get(i).getNumerator(); 
 		  
 		  double denominator = UnitPath.get(i).getDenominator(); 
-		  
+		     
 		 if(i == 0)
 		 {
 			 System.out.print(numerator + startPrefix+dimensionName + "/" +
@@ -170,35 +171,37 @@ if(dimension.equals((Converter.dimensionValue.length)) || (dimension.equals(Conv
  
 else if(dimension.equals(Converter.dimensionValue.temperature))
 {
+DecimalFormat df = new DecimalFormat("#.##");
+
 	//cel to kel
 	if(tempCase ==1)
 	{
-		System.out.print(startNum+" " + " "+273.15 + " = "+ answer );
+		System.out.print(startNum+ " "  + dimensionName + " "+startPrefix+" " + " "+273.15 + " = "+ df.format(answer) + " "  + dimensionName + " "+GoalUnit);
 	}
 	//cel to far
 	else if(tempCase ==2)
 	{
-		System.out.print("("+startNum +" x  9/5) + 32 = "+ answer );
+		System.out.print("("+startNum+ " "  + dimensionName + " "+startPrefix +" x  9/5) + 32 = "+ df.format(answer)+ " "+ dimensionName + " "+GoalUnit  );
 	}
 	//kel to cel
 	else if(tempCase == 3)
 	{
-		System.out.print(startNum+ " - 273.15 = "+ answer );
+		System.out.print(startNum+ " "  + dimensionName + " "+startPrefix+ " - 273.15 = "+ df.format(answer)+ " " + dimensionName + " "+GoalUnit);
 	}
 	//kel to far
 	else if(tempCase == 4)
 	{
-		System.out.print("[("+startNum+ " - 273.15) x 9/5] +32 = "+ answer );
+		System.out.print("[("+startNum+ " "  + dimensionName + " "+startPrefix+ " - 273.15) x 9/5] +32 = "+ df.format(answer)+ " "+ dimensionName + " "+GoalUnit);
 	}
 	//far to cel
 	else if(tempCase ==5)
 	{
-		System.out.print("("+ startNum+ " - 32) x 5/9 = " + answer);
+		System.out.print("("+ startNum+ " "  + dimensionName + " "+startPrefix+ " - 32) x 5/9 = " + df.format(answer)+ " " + dimensionName + " "+GoalUnit );
 	}
 	//far to kel
 	else if (tempCase ==6)
 	{
-		System.out.print("[(" + startNum + " - 32) x 5/9] + 273.15 = " + answer);
+		System.out.print("[(" + startNum+ " "  + dimensionName + " "+startPrefix + " - 32) x 5/9] + 273.15 = " + df.format(answer)+ " " + dimensionName + " "+GoalUnit);
 	}
   
 }
