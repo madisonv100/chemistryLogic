@@ -40,17 +40,17 @@ public prefixValue getBase(dimensionValue dimension)
 	
 		//length, weight
 		// TODO; MAKES IT REGONIZED VOLUME IN LENGHT CUBED 
-		giga(1000000000f), mega(1000000f), kilo(1000f), hecto(100f), decka(10f), base(1f),
-		deci(0.1f), centi(0.01f), milli(0.001f), micro(0.000001f), nano(.000000001f),
+		giga(1000000000,1), mega(1000000,1), kilo(1000,1), hecto(100,1), decka(10,1), base(1,1),
+		deci(0.1,1), centi(0.01,1), milli(0.001,1), micro(0.000001,1), nano(.000000001,1),
 		
 		//time second is your base
 		
-		seconds(1f), minutes(3600f), hours(216000f), days(5184000f), weeks(36288000f), years(1886976000f),
+		seconds(1,1), minutes(3600,1), hours(216000,1), days(5184000,1), weeks(36288000,1), years(1886976000,1),
 		
 		//PRESSURE
 		//atm is your base 
 		
-		atm(1f), torr(760f), mmhg(760f), kpa(101.3f), psi(147f),
+		atm(1,1), torr(760,1), mmhg(760,1), kpa(101.3,1), psi(147,1),
 		
 		//SPEED
 		//Base: is the base for time and length --> meters / seconds 
@@ -60,23 +60,22 @@ public prefixValue getBase(dimensionValue dimension)
 		
 		//temperature 
 		//BASE = celcius 
-		celcius(1f), kelvin(274.15f), farenheit(33.8f),
+		celcius(1,1), kelvin(274.15,1), farenheit(33.8,1),
 		
 		//default
-		invalid(0f)
+		invalid(0,1)
 		
 		;
 		
-		public Float unitsFromBase;
-		prefixValue(Float unitsFromBase)
+		private doouble numerator;
+		private float denominator;
+		private prefixValue(double numerator, float denominator)
 		{
-			this.unitsFromBase = unitsFromBase;
+			this.numerator = numerator;
+			this.denominator = denominator;
 			
 		}
-		public Float getUnitsFromBase()
-		{
-			return this.unitsFromBase;
-		}
+	
 	}
 	
 	public enum dimensionValue
