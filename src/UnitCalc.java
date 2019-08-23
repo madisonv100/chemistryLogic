@@ -21,8 +21,8 @@ Converter.prefixValue StartingUnit;
 Converter.prefixValue GoalUnit;
 String goalPrefix;
 String startPrefix;
-float startNum;
-float answer;
+double startNum;
+double answer;
 String dimensionName;
 Converter.dimensionValue dimension;
 
@@ -31,10 +31,11 @@ Converter.dimensionValue dimension;
 
 
 
-UnitCalc(String dimension, String dimensionName, String StartingUnit, float startNum,  String GoalUnit)
+UnitCalc(String dimension, String StartingUnit, double startNum,  String GoalUnit)
 {
-this.dimensionName = dimensionName;
+
 this.dimension = Converter.getDimension(dimension);
+this.dimensionName = Converter.getDimensionName(this.dimension);
 
 this.startNum = startNum;
 startPrefix = StartingUnit;
@@ -46,28 +47,23 @@ this.GoalUnit = Converter.getPrefix(GoalUnit);
 
 
 	
-}
+}  
 
 
+private int tempCase;
 public void createPath()
 {
+double fiveOverNine = 5/9;
+
 	
-//if(dimension =)
-  if(StartingUnit.unitsFromBase == GoalUnit.unitsFromBase)
-  {
-	 Fraction startAndEnd = new Fraction(startNum,1);
-	 UnitPath.add(startAndEnd);
-	 answer = startAndEnd.getDecimal();
-	 
-  }
-  //all other cases should be done in 3 steps 
-  else
+
+
+//if your are converting WITHIN the dimension length or weight 
+if(dimension.equals(Converter.dimensionValue.length) || dimension.equals(Converter.dimensionValue.weight))
+{
   {
 	  Fraction start = new Fraction(startNum,1);
-	
-	
-	
-	  
+
 	  Fraction base = new Fraction(StartingUnit.unitsFromBase,1);
 	  
 	  Fraction goal = new Fraction(1, GoalUnit.unitsFromBase);
@@ -77,41 +73,79 @@ public void createPath()
 	  UnitPath.add(goal);
 	  
 	Fraction f1 =  start.getProduct(base);
-	  Fraction f2 = f1.getProduct(goal);
+    Fraction f2 = f1.getProduct(goal);
 	  
 	answer = f2.getDecimal();
 	
 
 
 	
-	if (goal.getDenominator().equals(goal.getNumerator()))
+	if (goal.getDenominator() ==(goal.getNumerator()))
 	{
 		UnitPath.remove(2);
 		
-	}
-	  
-	
-	  
-	  
-	  
+	}	  
   }
+}
+else if (dimension.equals(Converter.dimensionValue.temperature))
+{
+
+	//cel to kel.
+    if(StartingUnit.equals(Converter.prefixValue.cel) && GoalUnit.equals(Converter.prefixValue.kelvin))
+	{
+    	tempCase = 1;
+		answer = (float) (startNum + 273.15);
+	}
+	//cel to far.
+	else if(StartingUnit.equals(Converter.prefixValue.cel) && GoalUnit.equals(Converter.prefixValue.far))
+	{
+		tempCase = 2;
+		answer =  (float) ((startNum*(1.8))+32);
+	}
+	//kel to cel.
+	else if(StartingUnit.equals(Converter.prefixValue.kelvin) && GoalUnit.equals(Converter.prefixValue.cel))
+	{
+		tempCase = 3;
+		answer = (float) (startNum - 273.15);
+	}
+	//kel to far.
+	else if(StartingUnit.equals(Converter.prefixValue.kelvin) && GoalUnit.equals(Converter.prefixValue.far))
+	{
+		tempCase = 4;
+	  answer =  (float)((startNum-273.15)*(1.8)+32);
+	}
+	//far to cel 
+	else if(StartingUnit.equals(Converter.prefixValue.far) && GoalUnit.equals(Converter.prefixValue.cel))
+	{
+		tempCase = 5;
+		answer =  (float)((startNum-32)*(.5555556));
+	}
+	//far to kel
+	else if(StartingUnit.equals(Converter.prefixValue.far) && GoalUnit.equals(Converter.prefixValue.kelvin))
+	{
+		tempCase = 6;
+		answer = (float) (((startNum-32)*(.5555556))+ 273.15);
+	}
+
+
+
+
   
-  
+}
 }
 
 public void makeString()
 {
 	
-if(dimension.equals(Converter.dimensionValue.weight)|| dimension.equals(Converter.dimensionValue.volume) || dimension.equals(Converter.dimensionValue.length)
-	||	dimension.equals(Converter.dimensionValue.weight))
-{
-	
 
-	  for (int i = 0; i < UnitPath.size(); i ++) 
+	
+if(dimension.equals((Converter.dimensionValue.length)) || (dimension.equals(Converter.dimensionValue.weight)))
+{
+	for (int i = 0; i < UnitPath.size(); i ++) 
 	  { 
-		  Float numerator =  UnitPath.get(i).getNumerator(); 
+		  double numerator =  UnitPath.get(i).getNumerator(); 
 		  
-		  Float denominator = UnitPath.get(i).getDenominator(); 
+		  double denominator = UnitPath.get(i).getDenominator(); 
 		  
 		 if(i == 0)
 		 {
@@ -133,9 +167,44 @@ if(dimension.equals(Converter.dimensionValue.weight)|| dimension.equals(Converte
 	  
 	  }
 }
-
+ 
+else if(dimension.equals(Converter.dimensionValue.temperature))
+{
+	//cel to kel
+	if(tempCase ==1)
+	{
+		System.out.print(startNum+" " + " "+273.15 + " = "+ answer );
+	}
+	//cel to far
+	else if(tempCase ==2)
+	{
+		System.out.print("("+startNum +" x  9/5) + 32 = "+ answer );
+	}
+	//kel to cel
+	else if(tempCase == 3)
+	{
+		System.out.print(startNum+ " - 273.15 = "+ answer );
+	}
+	//kel to far
+	else if(tempCase == 4)
+	{
+		System.out.print("[("+startNum+ " - 273.15) x 9/5] +32 = "+ answer );
+	}
+	//far to cel
+	else if(tempCase ==5)
+	{
+		System.out.print("("+ startNum+ " - 32) x 5/9 = " + answer);
+	}
+	//far to kel
+	else if (tempCase ==6)
+	{
+		System.out.print("[(" + startNum + " - 32) x 5/9] + 273.15 = " + answer);
+	}
+  
+}
 
 }
+
 
 
 

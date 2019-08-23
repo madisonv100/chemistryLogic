@@ -1,11 +1,11 @@
 
 public class Fraction {
 
-	private float numerator;
-	private float denominator;
+	private double numerator;
+	private double denominator;
 	
 	
-Fraction(float numerator, float denominator)
+Fraction(double numerator, double denominator)
 {
 	this.numerator = numerator;
 	this.denominator = denominator;
@@ -14,18 +14,18 @@ Fraction(float numerator, float denominator)
 	{
 		denominator =1;
 	}
-} 
+}  
 
 public Fraction getProduct(Fraction otherFraction)
 {
-	Float newNumerator = numerator*otherFraction.numerator;
-	Float newDenominator = denominator*otherFraction.denominator;
+	double newNumerator = numerator*otherFraction.numerator;
+	double newDenominator = denominator*otherFraction.denominator;
  Fraction f1 = new Fraction(newNumerator, newDenominator);
  return f1;
 }
 
 
-public Float getDecimal()
+public double getDecimal()
 {
 	return numerator/denominator;
 	
@@ -37,11 +37,11 @@ public String toString()
 	
 }
 
-public Float getNumerator()
+public double getNumerator()
 {
 	return numerator;
 }
-public Float getDenominator()
+public double getDenominator()
 {
 	return denominator;
 }

@@ -17,7 +17,7 @@ private Converter.dimensionValue goalDimension;
 		this.startDimension = Converter.getDimension(startDimension);
 		
 	}
-	
+	 
 	/*
 	 * CASE'S 
 	 * 	length --> 
