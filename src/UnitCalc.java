@@ -56,11 +56,8 @@ public void createPath()
 {
 double fiveOverNine = 5/9;
 
-	
-
-
-//if your are converting WITHIN the dimension length or weight 
-if(dimension.equals(Converter.dimensionValue.length) || dimension.equals(Converter.dimensionValue.weight))
+//if your are converting WITHIN the dimension length or weight or volume
+if(dimension.equals(Converter.dimensionValue.length) || dimension.equals(Converter.dimensionValue.weight) || dimension.equals(Converter.dimensionValue.weight))
 {
   {
 	  Fraction start = new Fraction(startNum,1);
@@ -127,11 +124,12 @@ else if (dimension.equals(Converter.dimensionValue.temperature))
 		tempCase = 6;
 		answer = (float) (((startNum-32)*(.5555556))+ 273.15);
 	}
-
-
-
-
   
+}
+
+else if (dimension.equals(Converter.dimensionValue.pressure))
+{
+	if(StartingUnit)
 }
 }
 
