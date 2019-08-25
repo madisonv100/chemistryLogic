@@ -51,10 +51,10 @@ this.GoalUnit = Converter.getPrefix(GoalUnit);
 }  
 
 
-private int tempCase;
+private int tempCase;  
 public void createPath()
 {
-double fiveOverNine = 5/9;
+
 
 //if your are converting WITHIN the dimension length or weight or volume
 if(dimension.equals(Converter.dimensionValue.length) || dimension.equals(Converter.dimensionValue.weight) || dimension.equals(Converter.dimensionValue.weight))
@@ -74,10 +74,7 @@ if(dimension.equals(Converter.dimensionValue.length) || dimension.equals(Convert
     Fraction f2 = f1.getProduct(goal);
 	  
 	answer = f2.getDecimal();
-	
 
-
-	
 	if (goal.getDenominator() ==(goal.getNumerator()))
 	{
 		UnitPath.remove(2);
@@ -126,19 +123,59 @@ else if (dimension.equals(Converter.dimensionValue.temperature))
 	}
   
 }
-
-else if (dimension.equals(Converter.dimensionValue.pressure))
+else if(dimension.equals(Converter.dimensionValue.pressure))
 {
-	if(StartingUnit)
+	//if you are starting at the base unit
+	if(StartingUnit.equals(Converter.prefixValue.atm))
+	{
+		Fraction start = new Fraction(startNum,1);
+		Fraction goal = new Fraction(GoalUnit.unitsFromBase,1);
+		UnitPath.add(start);
+		UnitPath.add(goal);		
+		
+		Fraction f1 =  start.getProduct(goal);
+		answer = f1.getDecimal();
+	}
+	//if you are ending in the base Unit
+	else if(GoalUnit.equals(Converter.prefixValue.atm))
+	{
+		Fraction start = new Fraction(startNum, 1);
+		Fraction goal = new Fraction(1,StartingUnit.unitsFromBase);
+		UnitPath.add(start);
+		UnitPath.add(goal);
+		
+		Fraction f1 = start.getProduct(goal);
+		answer = f1.getDecimal();
+		
+	}
+	//if your not starting or ending in the base unit
+	else if (!(StartingUnit.equals(Converter.prefixValue.atm)) && 
+			!(GoalUnit.equals(Converter.prefixValue.atm)))
+	{
+		Fraction start = new Fraction(startNum,1);
+		Fraction base = new Fraction(1, StartingUnit.unitsFromBase);
+		Fraction goal = new Fraction(GoalUnit.unitsFromBase,1);
+		UnitPath.add(start);
+		UnitPath.add(base);
+		UnitPath.add(goal);
+		
+		Fraction f1 = start.getProduct(base);
+		Fraction f2 = f1.getProduct(goal);
+		
+		answer = f2.getDecimal();
+		
+	}
+	
 }
+
+
 }
 
 public void makeString()
 {
 	
-
-	
-if(dimension.equals((Converter.dimensionValue.length)) || (dimension.equals(Converter.dimensionValue.weight)))
+if(dimension.equals((Converter.dimensionValue.length)) || (dimension.equals(Converter.dimensionValue.weight)) || (dimension.equals(Converter.dimensionValue.volume))
+	||	dimension.equals(Converter.dimensionValue.pressure))
 {
 	for (int i = 0; i < UnitPath.size(); i ++) 
 	  { 
